@@ -22,7 +22,7 @@ import {
 export default class CountDownComponent extends Component {
 
     static defaultProps = {
-        time: 2 * 60,    // 10分
+        time: 2 * 60,    // 两分钟
         fontSize: 12,
         fontColor: '#fa6117'
     };
@@ -39,10 +39,12 @@ export default class CountDownComponent extends Component {
 
     // 開啟定時器 兼容切換到後台
     componentDidMount() {
+        // 先记录当前的结束时间
         let endStamp = Date.now() + this.state.leftTime * 1000
-
+        
         this.timer = setInterval(() => {
             let nowStamp = Date.now()
+            // 每次倒计时都与当前时间比较
             let leftTime = Math.ceil((endStamp - nowStamp) / 1000) + 1
 
             if (leftTime > 0) {
